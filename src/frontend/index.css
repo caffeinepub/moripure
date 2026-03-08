@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* === MoriPure Design Tokens === */
+    /* Forest Green Palette */
+    --background: 0.98 0.008 145;
+    --foreground: 0.18 0.04 155;
+
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.04 155;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.04 155;
+
+    /* Primary: deep forest green */
+    --primary: 0.35 0.1 145;
+    --primary-foreground: 0.98 0.005 145;
+
+    /* Secondary: sage/mint tone */
+    --secondary: 0.93 0.04 145;
+    --secondary-foreground: 0.25 0.08 145;
+
+    --muted: 0.94 0.02 145;
+    --muted-foreground: 0.52 0.04 155;
+
+    /* Accent: vibrant lime-green */
+    --accent: 0.82 0.18 145;
+    --accent-foreground: 0.15 0.07 155;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.88 0.03 145;
+    --input: 0.88 0.03 145;
+    --ring: 0.42 0.12 145;
+
+    --chart-1: 0.55 0.18 145;
+    --chart-2: 0.65 0.14 165;
+    --chart-3: 0.45 0.1 130;
+    --chart-4: 0.82 0.18 145;
+    --chart-5: 0.72 0.15 155;
+
+    --sidebar: 0.96 0.02 145;
+    --sidebar-foreground: 0.18 0.04 155;
+    --sidebar-primary: 0.35 0.1 145;
+    --sidebar-primary-foreground: 0.98 0.005 145;
+    --sidebar-accent: 0.93 0.04 145;
+    --sidebar-accent-foreground: 0.25 0.08 145;
+    --sidebar-border: 0.88 0.03 145;
+    --sidebar-ring: 0.42 0.12 145;
+
+    /* Custom brand tokens */
+    --forest: 0.28 0.1 145;
+    --forest-deep: 0.22 0.09 150;
+    --leaf: 0.68 0.2 145;
+    --cream: 0.97 0.015 95;
+    --gold: 0.78 0.14 85;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Figtree", "Cabinet Grotesk", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Grain texture overlay */
+.grain-texture {
+  position: relative;
+}
+.grain-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Hero gradient mesh */
+.hero-gradient {
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 50%, oklch(0.88 0.08 145 / 0.6), transparent),
+    radial-gradient(ellipse 60% 80% at 80% 30%, oklch(0.92 0.05 160 / 0.5), transparent),
+    radial-gradient(ellipse 50% 50% at 50% 80%, oklch(0.94 0.06 130 / 0.4), transparent),
+    oklch(0.97 0.02 145);
+}
+
+/* Section alternating backgrounds */
+.section-alt {
+  background: oklch(0.95 0.025 148);
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -10px oklch(0.35 0.1 145 / 0.2);
+}
+
+/* Leaf decoration */
+@keyframes float-leaf {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+.float-animation {
+  animation: float-leaf 4s ease-in-out infinite;
+}
+
+/* Scroll into view animations handled by motion/react */
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--primary) / 0.4);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--primary) / 0.7);
+}
+
+/* Nav link underline effect */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: oklch(var(--accent));
+  transition: width 0.3s ease;
+  border-radius: 99px;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
